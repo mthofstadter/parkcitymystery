@@ -1,0 +1,44 @@
+/*style.css*/
+
+body {
+    background-color: lightblue;
+}
+
+#spell {
+    display: none;
+}
+
+.colorDiv {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+#redDiv {
+    background-color: crimson;
+    --shadow: red;
+}
+
+#greenDiv {
+    background-color: #3CDC14;
+    --shadow: #39FF00;
+}
+
+#blueDiv {
+    background-color: #143CDC;
+    --shadow: blue;
+}
+
+#yellowDiv {
+    background-color: #FFC300;
+    --shadow: yellow;
+}
+
+.highlight {
+    box-shadow: 0px 0px 5px 5px var(--shadow, black);
+    border-radius: 20px;
+}
+
+.reveal {
+    color: white;
+}
