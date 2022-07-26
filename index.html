@@ -12,12 +12,11 @@
   <h1>Michael and Lucie's Spellbook</h1>
   <p>Play DJ E-Flexx Says to unlock the next hint</p>
   <div id="gameDiv">
-      <h2>DJ E-Flexx Says</h2>
       <div id="colorsDiv">
-          <div id="greenDiv" class="colorDiv">Green</div>
-          <div id="redDiv" class="colorDiv">Red</div>
-          <div id="blueDiv" class="colorDiv">Blue</div>
-          <div id="yellowDiv" class="colorDiv">Yellow</div>
+          <div id="greenDiv" onclick="clickColor(this)" class="colorDiv"></div>
+          <div id="redDiv" onclick="clickColor(this)" class="colorDiv"></div>
+          <div id="blueDiv" onclick="clickColor(this)" class="colorDiv"></div>
+          <div id="yellowDiv" onclick="clickColor(this)" class="colorDiv"></div>
       </div>
       <button onclick="startGame()">Start Game</button>
   </div>

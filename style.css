@@ -1,7 +1,11 @@
 /*style.css*/
 
 body {
-    background-color: lightblue;
+    background: lightblue;
+}
+
+footer {
+    display: none;
 }
 
 #spell {
@@ -37,8 +41,20 @@ body {
 .highlight {
     box-shadow: 0px 0px 5px 5px var(--shadow, black);
     border-radius: 20px;
+    background-color: var(--shadow) !important;
 }
+
 
 .reveal {
     color: white;
+}
+
+#colorsDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 250px;
+    margin-bottom: 20px;
+
 }

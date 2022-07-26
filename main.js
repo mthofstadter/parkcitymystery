@@ -1,4 +1,15 @@
 
+var colorCode = "";
+let index = 0;
+let round = 0;
+var blinking = false;
+var clickIndex = 0;
+var started = false;
+// var audio0 = new Audio('sounds/.mp3');
+// var audio1 = new Audio('sounds/.mp3');
+// var audio2 = new Audio('sounds/.mp3');
+// var audio3 = new Audio('sounds/.mp3');
+
 function checkPassword() {
     var pass = document.getElementById("password").value;
     pass = pass.split(" ").join("");
@@ -23,47 +34,102 @@ function showSpell() {
     // appendChildElement.innerHTML = bookmark.url
 }
 
-
 function startGame() {
     //show colors
     //ready? 3... 2... 1...
-    var colorCode = "";
+    colorCode = ""; //reset
     for(var i=0; i<8; i++) {
         colorCode = colorCode +  Math.floor(Math.random() * 4);
     }
     console.log("code = " + colorCode);
-    blink(colorCode);
+    index = 0;
+    round = 0;
+    clickIndex = 0;
+    started = true;
+    blink();
 }
 
-function blink(colorCode) {
-    var round = 0; //0-5
-    for(var i=0; i<(round+3); i++) {
-        var blinkColor = colorCode.charAt(i);
-        console.log("char = " + blinkColor);
-        setTimeout(function() {
-            highlight(blinkColor);
-        }, 1000+(2000*i))
-        setTimeout(function() {
-            unhighlight(blinkColor);
-        }, 2000+(2000*i))
-     }
+function blink() {
+    blinking = true;
+    if(index<3+round) {
+        highlight(colorCode.charAt(index));
+        index++;
+        setTimeout(blink, 500);
+    } else {
+        blinking = false;
+    }
 }
 
+function nextRound() {
+    round++;
+    index = 0;
+    clickIndex = 0;
+    if(round==6) {
+        win();
+        return;
+    }
+    blink();
+}
+function clickColor(colorDiv) {
+    if(blinking || !started) { //doesn't allow clicking until sequence over
+        return;
+    }
+    highlight(colorDiv.id);
+    let answer = divNum(colorDiv);
+    let correctAnswer = colorCode.charAt(clickIndex);
+    if(answer == correctAnswer) {
+        clickIndex++;
+    } else {
+        gameOver();
+        return;
+    }
+    if(clickIndex == round+3) { //passed round
+        setTimeout(nextRound,500);
+    }
 
+}
+
+function gameOver() {
+    started = false;
+    window.alert("fail");
+}
+
+function divNum(colorDiv) {
+    if(colorDiv.id == "greenDiv") {
+        return 0;
+    } else if(colorDiv.id == "redDiv") {
+        return 1;
+    } else if(colorDiv.id == "blueDiv") {
+        return 2;
+    } else if(colorDiv.id == "yellowDiv") {
+        return 3;
+    }
+}
 
  function highlight(colorDiv) {
     if(colorDiv == "0") {
+        // audio0.currentTime = 0
+        // audio0.play();
         colorDiv = "greenDiv";
     } else if(colorDiv == "1") {
+        // audio1.currentTime = 0
+        // audio1.play();
         colorDiv = "redDiv";
     } else if(colorDiv == "2") {
+        // audio2.currentTime = 0
+        // audio2.play();
         colorDiv = "blueDiv";
     } else if(colorDiv == "3") {
+        // audio3.currentTime = 0
+        // audio3.play();
         colorDiv = "yellowDiv";
     }
-    console.log("wait..." + colorDiv);
     document.getElementById(colorDiv).classList.add("highlight");
+    setTimeout(function() {
+        unhighlight(colorDiv);
+    }, (300))
  }
+
 
  function unhighlight(colorDiv) {
     if(colorDiv == "0") {
@@ -76,4 +142,9 @@ function blink(colorCode) {
         colorDiv = "yellowDiv";
     }
     document.getElementById(colorDiv).classList.remove("highlight");
+ }
+
+
+ function win() {
+    window.alert("win");
  }
