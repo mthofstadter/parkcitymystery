@@ -5,10 +5,10 @@ let round = 0;
 var blinking = false;
 var clickIndex = 0;
 var started = false;
-// var audio0 = new Audio('sounds/.mp3');
-// var audio1 = new Audio('sounds/.mp3');
-// var audio2 = new Audio('sounds/.mp3');
-// var audio3 = new Audio('sounds/.mp3');
+var audio0 = new Audio('sounds/note0.mp3');
+var audio1 = new Audio('sounds/note1.mp3');
+var audio2 = new Audio('sounds/note2.mp3');
+var audio3 = new Audio('sounds/note3.mp3');
 
 function checkPassword() {
     var pass = document.getElementById("password").value;
@@ -74,7 +74,7 @@ function clickColor(colorDiv) {
     if(blinking || !started) { //doesn't allow clicking until sequence over
         return;
     }
-    highlight(colorDiv.id);
+    highlight(divNum(colorDiv));
     let answer = divNum(colorDiv);
     let correctAnswer = colorCode.charAt(clickIndex);
     if(answer == correctAnswer) {
@@ -84,7 +84,7 @@ function clickColor(colorDiv) {
         return;
     }
     if(clickIndex == round+3) { //passed round
-        setTimeout(nextRound,500);
+        setTimeout(nextRound,750);
     }
 
 }
@@ -108,20 +108,21 @@ function divNum(colorDiv) {
 
  function highlight(colorDiv) {
     if(colorDiv == "0") {
-        // audio0.currentTime = 0
-        // audio0.play();
+        console.log("here");
+        audio0.currentTime = 0
+        audio0.play();
         colorDiv = "greenDiv";
     } else if(colorDiv == "1") {
-        // audio1.currentTime = 0
-        // audio1.play();
+        audio1.currentTime = 0
+        audio1.play();
         colorDiv = "redDiv";
     } else if(colorDiv == "2") {
-        // audio2.currentTime = 0
-        // audio2.play();
+        audio2.currentTime = 0
+        audio2.play();
         colorDiv = "blueDiv";
     } else if(colorDiv == "3") {
-        // audio3.currentTime = 0
-        // audio3.play();
+        audio3.currentTime = 0
+        audio3.play();
         colorDiv = "yellowDiv";
     }
     document.getElementById(colorDiv).classList.add("highlight");
