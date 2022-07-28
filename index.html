@@ -6,11 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Encrypted Spell</title>
     <link rel="stylesheet" href="./style.css">
-    <!-- <link rel="icon" href="./favicon.ico" type="image/x-icon"> -->
   </head>
-  <body>
+  <body onload="loadFunc()">
   <h1>Michael and Lucie's Spellbook</h1>
-  <p>Play DJ E-Flexx Says to unlock the next hint</p>
+  <p id="instructions">Play <span>DJ E-Flexx Says</span> to unlock the next hint</p>
   <div id="gameDiv">
       <div id="colorsDiv">
           <div id="greenDiv" onclick="clickColor(this)" class="colorDiv"></div>
@@ -18,13 +17,16 @@
           <div id="blueDiv" onclick="clickColor(this)" class="colorDiv"></div>
           <div id="yellowDiv" onclick="clickColor(this)" class="colorDiv"></div>
       </div>
-      <button onclick="startGame()">Start Game</button>
+      <p id="gameMessage"></p>
+      <p id="hint"></p>
+      <button onclick="startGame()" id="startButton">Start Game</button>
   </div>
   <p>Enter password to access resurrection spell:</p>
-  <input id="password" type="text">
+  <input id="password" type="text" autocapitalize="false" autocomplete="false" spellcheck="false">
   <button onclick="checkPassword()">Enter</button>
-  <div id="spell">
-    <p>Wait you literally slayed</p>
+  <p id="errorMessage"></p>
+  <div id="spellDiv">
+    <p id="spell"></p>
   </div>
     <script src="main.js"></script>
   </body>

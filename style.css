@@ -8,8 +8,25 @@ footer {
     display: none;
 }
 
-#spell {
-    display: none;
+#instructions {
+    size: 16px;
+    font-family: Helvetica, sans-serif;
+}
+
+#instructions span {
+    font-weight: bold;
+}
+
+#gameDiv {
+    /* width: 50%;
+    margin: 0px auto; */
+    margin-bottom: 40px;
+}
+
+#startButton {
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
 }
 
 .colorDiv {
@@ -44,11 +61,6 @@ footer {
     background-color: var(--shadow) !important;
 }
 
-
-.reveal {
-    color: white;
-}
-
 #colorsDiv {
     display: flex;
     flex-direction: row;
@@ -56,5 +68,52 @@ footer {
     gap: 20px;
     width: 250px;
     margin-bottom: 20px;
+    justify-content: center;
 
+}
+
+#gameMessage {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#gameMessage.lost {
+    color: red;
+}
+
+#gameMessage.won {
+    color: green;
+}
+
+#hint {
+    font-size: 18px;
+}
+
+#password.error {
+    border-color: red;
+}
+
+#errorMessage {
+    color: red;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#spellDiv {
+    display: none;
+}
+
+@keyframes reveal {
+    from {
+        color: rgba(0, 0, 0, 0);
+    } to {
+        color: black;
+    }
+}
+
+#spellDiv.reveal {
+    display: block;
+    animation-name: reveal;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
 }

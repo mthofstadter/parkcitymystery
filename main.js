@@ -1,52 +1,44 @@
-
 var colorCode = "";
 let index = 0;
 let round = 0;
 var blinking = false;
 var clickIndex = 0;
-var started = false;
-var audio0 = new Audio('sounds/note0.mp3');
-var audio1 = new Audio('sounds/note1.mp3');
-var audio2 = new Audio('sounds/note2.mp3');
-var audio3 = new Audio('sounds/note3.mp3');
 
-function checkPassword() {
-    var pass = document.getElementById("password").value;
-    pass = pass.split(" ").join("");
-    pass = pass.toLowerCase();
-    console.log(pass);
 
-    if(pass == "tischtuesdaytea") {
-        console.log("correct");
-        showSpell();
+let gameMessage;
+
+function loadFunc() {
+    document.getElementById("colorsDiv").style = "display: none";
+    gameMessage = document.getElementById("gameMessage");
+    gameMessage.style = "display: none";
+    let wonBefore = localStorage.getItem("wonBefore");
+    if(wonBefore == "true") {
+        win();
     } else {
-        window.alert("wrong, bitch");
-        console.log("wrong");
+        localStorage.setItem("wonBefore", "false");
     }
 }
 
-function showSpell() {
-    var spellDiv = document.getElementById("spell");
-    spellDiv.classList.add("reveal");
-    spellDiv.style = "display:block";
-    // spellDiv.appe
-    // appendChildElement = parentElement.appendChild(childElement)
-    // appendChildElement.innerHTML = bookmark.url
-}
-
 function startGame() {
+    localStorage.setItem("wonBefore", "false");
     //show colors
     //ready? 3... 2... 1...
     colorCode = ""; //reset
     for(var i=0; i<8; i++) {
         colorCode = colorCode +  Math.floor(Math.random() * 4);
     }
-    console.log("code = " + colorCode);
+
+    document.getElementById("colorsDiv").style = "display: flexbox";
+    gameMessage.classList.remove("won");
+    gameMessage.classList.remove("lost");
+    document.getElementById("startButton").style = "visibility: hidden";
+    gameMessage.style = "display: none";
+
     index = 0;
     round = 0;
     clickIndex = 0;
-    started = true;
-    blink();
+    blinking = true;
+    setTimeout(blink, 1000);
 }
 
 function blink() {
@@ -71,7 +63,7 @@ function nextRound() {
     blink();
 }
 function clickColor(colorDiv) {
-    if(blinking || !started) { //doesn't allow clicking until sequence over
+    if(blinking) { //doesn't allow clicking until sequence over
         return;
     }
     highlight(divNum(colorDiv));
@@ -90,8 +82,12 @@ function clickColor(colorDiv) {
 }
 
 function gameOver() {
-    started = false;
-    window.alert("fail");
+    document.getElementById("startButton").style = "visibility: show;"
+    document.getElementById("colorsDiv").style = "display: none";
+    gameMessage.innerHTML = "Game Over";
+    gameMessage.style = "display: block";
+    gameMessage.classList.add("lost");
+
 }
 
 function divNum(colorDiv) {
@@ -108,21 +104,12 @@ function divNum(colorDiv) {
 
  function highlight(colorDiv) {
     if(colorDiv == "0") {
-        console.log("here");
-        audio0.currentTime = 0
-        audio0.play();
         colorDiv = "greenDiv";
     } else if(colorDiv == "1") {
-        audio1.currentTime = 0
-        audio1.play();
         colorDiv = "redDiv";
     } else if(colorDiv == "2") {
-        audio2.currentTime = 0
-        audio2.play();
         colorDiv = "blueDiv";
     } else if(colorDiv == "3") {
-        audio3.currentTime = 0
-        audio3.play();
         colorDiv = "yellowDiv";
     }
     document.getElementById(colorDiv).classList.add("highlight");
@@ -145,7 +132,50 @@ function divNum(colorDiv) {
     document.getElementById(colorDiv).classList.remove("highlight");
  }
 
-
  function win() {
-    window.alert("win");
+    if(localStorage.getItem("wonBefore") == "true") {
+        gameMessage.innerHTML = "You already slayed";
+    } else {
+        localStorage.setItem("wonBefore", "true");
+        gameMessage.innerHTML = "You slayed";
+    }
+    document.getElementById("colorsDiv").style = "display: none";
+    document.getElementById("instructions").style = "display: none";
+    gameMessage.classList.add("won");
+    gameMessage.style = "display: block";
+    document.getElementById("hint").innerHTML = 
+    "All the way from the capital city / Step by step with care / Even though they don't smell pretty / Look inside the correct pair";
  }
+
+/* Password ===================================== */
+
+ function checkPassword() {
+    let errorMessage = document.getElementById("errorMessage");
+    let passwordInput = document.getElementById("password");
+    let pass = passwordInput.value;
+    pass = pass.split(" ").join("");
+    pass = pass.toLowerCase();
+    console.log(pass);
+    if(pass == "tischtuesdaytea") {
+        errorMessage.innerHTML = "";
+        passwordInput.classList.remove("error");
+        console.log("correct");
+
+        showSpell();
+    } else {
+        console.log("wrong");
+        errorMessage.innerHTML = "Incorrect Password";
+        passwordInput.classList.add("error");
+        passwordInput.value = "";
+    }
+}
+
+function showSpell() {
+    var spellDiv = document.getElementById("spellDiv");
+    spellDiv.classList.add("reveal");
+    document.getElementById("spell").innerHTML = "Spell goes here";
+
+    // spellDiv.appe
+    // appendChildElement = parentElement.appendChild(childElement)
+    // appendChildElement.innerHTML = bookmark.url
+}
