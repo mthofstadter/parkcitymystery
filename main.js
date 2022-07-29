@@ -179,6 +179,6 @@ function showSpell() {
     var spellDiv = document.getElementById("spellDiv");
     spellDiv.classList.add("reveal");
     document.getElementById("spellInstructions").innerHTML = "Gather around your fallen friends and place the resurrection pickle on their bodies.<br>Everyone must join hands and speak as one.<br>Recite the spell:"
-    document.getElementById("spell").innerHTML = "Baa baa Dicky Moe, have you any wool?<br>Yas kweng yas kweng three bags full<br>Jack be nimble Jack be quick<br>Jack jump over this glaping slit";
+    document.getElementById("spell").innerHTML = "Baa baa Dicky Moe, have you any wool?<br>Yas kweng yas kweng three bags full<br>Jack be nimble Jack be quick<br>Jack jump over this gaping slit";
 
 }
