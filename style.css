@@ -1,6 +1,7 @@
 /*style.css*/
 
 body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     background: url(naturalwhite.png) repeat;
 }
 
@@ -14,7 +15,6 @@ footer {
 
 #instructions {
     size: 16px;
-    font-family: Helvetica, sans-serif;
 }
 
 #instructions span {
@@ -107,11 +107,12 @@ footer {
     display: none;
 }
 
+
 @keyframes reveal {
     from {
-        color: rgba(0, 0, 0, 0);
+        opacity: 0;
     } to {
-        color: black;
+        opacity: 1;
     }
 }
 
@@ -120,4 +121,16 @@ footer {
     animation-name: reveal;
     animation-duration: 4s;
     animation-fill-mode: forwards;
+}
+
+#spell.reveal {
+    animation-name: reveal;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+#spell {
+    font-size: 20px;
+    font-family: 'Ibarra Real Nova', serif;
+    color: crimson;
 }

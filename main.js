@@ -21,14 +21,13 @@ function loadFunc() {
 
 function startGame() {
     localStorage.setItem("wonBefore", "false");
-    //show colors
-    //ready? 3... 2... 1...
     colorCode = ""; //reset
     for(var i=0; i<8; i++) {
         colorCode = colorCode +  Math.floor(Math.random() * 4);
     }
 
     document.getElementById("colorsDiv").style = "display: flexbox";
+    document.getElementById("hint").innerHTML = "";
     gameMessage.classList.remove("won");
     gameMessage.classList.remove("lost");
     document.getElementById("startButton").style = "visibility: hidden";
@@ -144,7 +143,7 @@ function divNum(colorDiv) {
     gameMessage.classList.add("won");
     gameMessage.style = "display: block";
     document.getElementById("hint").innerHTML = 
-    "All the way from the capital city / Step by step with care / Even though they don't smell pretty / Look inside the correct pair";
+    "All the way from the capital city<br> Step by step with care<br> Even though they don't smell pretty<br>Look inside the correct pair";
  }
 
 /* Password ===================================== */
@@ -155,15 +154,20 @@ function divNum(colorDiv) {
     let pass = passwordInput.value;
     pass = pass.split(" ").join("");
     pass = pass.toLowerCase();
-    console.log(pass);
-    if(pass == "tischtuesdaytea") {
+    let alphabetized = pass.split('').sort().join('');
+    console.log(alphabetized);
+
+    if(pass == "tischtuesdaytea" || pass == "tuesdayteatisch") {
         errorMessage.innerHTML = "";
         passwordInput.classList.remove("error");
         console.log("correct");
 
         showSpell();
+    } else if(alphabetized == "aacdeehisstttuy") {
+        errorMessage.innerHTML = "Incorrect: You need to unscramble the password";
+        passwordInput.classList.add("error");
+        passwordInput.value = "";
     } else {
-        console.log("wrong");
         errorMessage.innerHTML = "Incorrect Password";
         passwordInput.classList.add("error");
         passwordInput.value = "";
@@ -174,10 +178,7 @@ function showSpell() {
     var spellDiv = document.getElementById("spellDiv");
     var spellDiv = document.getElementById("spellDiv");
     spellDiv.classList.add("reveal");
-    document.getElementById("spellInstructions").innerHTML = "Gather around your fallen friends and join hands. Everyone must speak as one. Recite the spell:"
-    document.getElementById("spell").innerHTML = "Baa Baa Dicky Moe, Have you any wool? / yas kweng yas kweng three bags full / Jack be nimble Jack be quick / Jack jump over this glaping slit";
+    document.getElementById("spellInstructions").innerHTML = "Gather around your fallen friends and place the resurrection pickle on their bodies.<br>Everyone must join hands and speak as one.<br>Recite the spell:"
+    document.getElementById("spell").innerHTML = "Baa baa Dicky Moe, have you any wool?<br>Yas kweng yas kweng three bags full<br>Jack be nimble Jack be quick<br>Jack jump over this glaping slit";
 
-    // spellDiv.appe
-    // appendChildElement = parentElement.appendChild(childElement)
-    // appendChildElement.innerHTML = bookmark.url
 }

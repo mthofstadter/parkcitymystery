@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Ibarra+Real+Nova&display=swap" rel="stylesheet">
   </head>
   <body onload="loadFunc()">
   <h1>Michael and Lucie's Spellbook</h1>
@@ -25,7 +25,7 @@
       <button onclick="startGame()" id="startButton">Start Game</button>
   </div>
   <p>Enter password to access resurrection spell:</p>
-  <input id="password" type="text" autocapitalize="false" autocomplete="false" spellcheck="false">
+  <input id="password" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off">
   <button onclick="checkPassword()">Enter</button>
   <p id="errorMessage"></p>
   <div id="spellDiv">
