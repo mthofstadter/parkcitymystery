@@ -172,8 +172,10 @@ function divNum(colorDiv) {
 
 function showSpell() {
     var spellDiv = document.getElementById("spellDiv");
+    var spellDiv = document.getElementById("spellDiv");
     spellDiv.classList.add("reveal");
-    document.getElementById("spell").innerHTML = "Spell goes here";
+    document.getElementById("spellInstructions").innerHTML = "Gather around your fallen friends and join hands. Everyone must speak as one. Recite the spell:"
+    document.getElementById("spell").innerHTML = "Baa Baa Dicky Moe, Have you any wool? / yas kweng yas kweng three bags full / Jack be nimble Jack be quick / Jack jump over this glaping slit";
 
     // spellDiv.appe
     // appendChildElement = parentElement.appendChild(childElement)

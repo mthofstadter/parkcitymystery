@@ -1,7 +1,11 @@
 /*style.css*/
 
 body {
-    background: lightblue;
+    background: url(naturalwhite.png) repeat;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
 }
 
 footer {
